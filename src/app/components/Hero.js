@@ -18,7 +18,7 @@ const Hero = () => {
         <canvas className="w-full"></canvas>
       </div>
       <div className="absolute bottom-0 right-0 flex w-1/2 h-1/3 z-20 bg-white flex justify-center items-center">
-        <div className="w-full">
+        <div id="start" className="w-full">
           <SignUpForm />
         </div>
       </div>
