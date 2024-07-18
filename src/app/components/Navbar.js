@@ -14,7 +14,7 @@ const Navbar = () => {
     <header>
       <div className={``}>
         <nav
-          className={`${styles.paddingX} xl:max-w-full w-full fixed top-0 flex justify-between py-4 items-center navbar z-10 bg-[#FFFFFF] px-4`}
+          className={`${styles.paddingX} xl:max-w-full w-full fixed top-0 flex justify-between py-4 items-center navbar z-30 bg-transparent px-12`}
         >
           <div className={`w-1/2 flex justify-start`}>
             <Image src={Icon} alt="logo" className="w-[54px] h-[52px]" />

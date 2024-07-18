@@ -3,8 +3,8 @@
 export default function Footer() {
   return (
     <div>
-      <footer className="text-gray-800 w-4/5 mx-auto inter md:pt-24">
-        <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+      <footer className="text-gray-800 w-4/5 mx-auto inter">
+        <div className="container px-5 pt-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="flex-grow flex flex-wrap -mb-10 md:mt-0 mt-10 md:text-left text-center">
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 className="font-medium text-gray-900 text-base mb-3">
@@ -21,21 +21,30 @@ export default function Footer() {
                     Meet the Team
                   </a>
                 </li>
+                
+              </nav>
+            </div>
+            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+              <h2 className="font-medium text-gray-900 text-base mb-3">
+                Company
+              </h2>
+              <nav className="list-none mb-10 flex flex-col space-y-3 text-sm font-normal">
+               
                 <li>
                   <a className="text-gray-600 hover:text-gray-800 cursor-pointer">
-                    Press Releases
+                    Regulatory
                   </a>
                 </li>
                 <li>
                   <a className="text-gray-600 hover:text-gray-800 cursor-pointer">
-                    Roadmap
+                    Careers
                   </a>
                 </li>
               </nav>
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 className="font-medium text-gray-900 text-base mb-3">
-                Company
+                Investor Information
               </h2>
               <nav className="list-none mb-10 flex flex-col space-y-3 text-sm font-normal">
                 <li>
@@ -48,16 +57,25 @@ export default function Footer() {
                     Investor Relations
                   </a>
                 </li>
-                <li>
+                
+              </nav>
+            </div>
+            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+              <h2 className="font-medium text-gray-900 text-base mb-3">
+                Media
+              </h2>
+              <nav className="list-none mb-10 flex flex-col space-y-3 text-sm font-normal">
+              <li>
                   <a className="text-gray-600 hover:text-gray-800 cursor-pointer">
-                    Regulatory
+                    Press Releases
                   </a>
                 </li>
                 <li>
                   <a className="text-gray-600 hover:text-gray-800 cursor-pointer">
-                    Careers
+                    Roadmap
                   </a>
                 </li>
+                
               </nav>
             </div>
           </div>
