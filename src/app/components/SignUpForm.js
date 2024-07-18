@@ -23,14 +23,19 @@ export default function SignUpForm() {
               Please provide a valid Phone Number
             </Form.Message>
           </div>
-          <Form.Control asChild>
-            <input
-              className="box-border w-full bg-blackA2 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-black selection:bg-blackA6"
-              type="email"
-              placeholder="Ex: Hypothyroidism"
-              required
-            />
-          </Form.Control>
+          <div className="flex justify-between items-center gap-x-1">
+            <div className="box-border text-white shadow-blackA4 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-black px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none">
+              +65
+            </div>
+            <Form.Control asChild>
+              <input
+                className="box-border w-full bg-blackA2 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-black selection:bg-blackA6"
+                type="email"
+                placeholder="Enter Your Phone Number"
+                required
+              />
+            </Form.Control>
+          </div>
         </Form.Field>
         <Form.Field className="grid mb-[10px]" name="question">
           <div className="flex items-baseline justify-between">
@@ -60,7 +65,7 @@ export default function SignUpForm() {
         </Form.Field>
         <Form.Submit asChild>
           <button className="box-border w-full text-white shadow-blackA4 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-black px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none mt-[10px]">
-            Sign Up/Login
+            Sign Up / Login
           </button>
         </Form.Submit>
       </Form.Root>

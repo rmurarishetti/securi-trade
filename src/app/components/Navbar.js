@@ -18,7 +18,7 @@ const Navbar = () => {
         >
           <div className={`w-1/2 flex justify-start`}>
             <Image src={Icon} alt="logo" className="w-[54px] h-[52px]" />
-            <div className="font-playfair font-medium text-[20px] text-[#635BFF]/100 hover:text-[#0000FF] ml-2 flex items-center">
+            <div className="font-playfair font-medium text-[20px] text-[#FFFFFF] ml-2 flex items-center">
               <Link href={"/"}>SecuriTrade.</Link>
             </div>
           </div>
@@ -28,7 +28,7 @@ const Navbar = () => {
                 key={nav.id}
                 className={`font-playfair font-normal cursor-pointer text-[14px] ${
                   i === NavLinks.length - 1 ? "mr-0" : "mr-10"
-                } text-[#292929] hover:text-[#635BFF] mr-10 ${
+                } text-[#292929] hover:text-[#FFFFFF] mr-10 ${
                   currentRoute === `/#${nav.id}`
                     ? "border-b-4 border-black"
                     : "border-b-4 border-transparent"
