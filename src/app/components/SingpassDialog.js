@@ -1,9 +1,37 @@
 "use client";
+import { useEffect, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import React from "react";
 import { Cross2Icon } from "@radix-ui/react-icons";
 
-export default function MyInfoDialog() {
+export default function MyInfoDialog({ id, phone, nric }) {
+  
+  const [userData, setUserData] = useState({
+    Name: "",
+    Status: "Pending",
+    Phone: "",
+    NRIC: "",
+    Email: "",
+  });
+
+  useEffect(() => {
+    async function fetchData() {
+
+      
+      const response = await fetch("/api/myInfo", {
+        method: "GET",
+        headers: {
+          "Content-Type": "*/*",
+          "Access-Control-Allow-Origin": "*"
+          
+        },
+      });
+      const data = await response;
+      console.log(data);
+
+    }
+    fetchData();
+  }, []);
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
