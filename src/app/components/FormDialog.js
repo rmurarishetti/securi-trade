@@ -30,7 +30,7 @@ export default function ParticularsFormDialog() {
             <input
               className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
               id="name"
-              defaultValue="Enter your full name"
+              placeholder="Enter your full name"
             />
           </fieldset>
           <fieldset className="mb-[15px] flex items-center gap-5">
@@ -43,7 +43,7 @@ export default function ParticularsFormDialog() {
             <input
               className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
               id="nric"
-              defaultValue="Enter your 9 digit UIN"
+              placeholder="Enter your 9 digit UIN"
             />
           </fieldset>
           <fieldset className="mb-[15px] flex items-center gap-5">
@@ -56,7 +56,7 @@ export default function ParticularsFormDialog() {
             <input
               className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
               id="email"
-              defaultValue="Enter your email address"
+              placeholder="Enter your email address"
             />
           </fieldset>
           <fieldset className="mb-[15px] flex items-center gap-5">
@@ -69,7 +69,7 @@ export default function ParticularsFormDialog() {
             <input
               className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
               id="phone"
-              defaultValue="Enter your phone number."
+              placeholder="Enter your phone number."
             />
           </fieldset>
           <div className="mt-[25px] flex justify-end">
