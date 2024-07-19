@@ -28,7 +28,7 @@ export default function ParticularsComponents() {
         </span>
       </div>
 
-      <div className="w-full z-30 absolute bottom-0 right-0 flex bg-white justify-center items-cente">
+      <div className="w-full z-30 absolute bottom-0 right-0 flex bg-white justify-center items-center">
         <div className="w-full px-10 flex flex-col sm:flex-row justify-between sm:space-x-2">
           <div className="flex-1 p-5 border-2 rounded-md my-2">
             <div className="flex-col">
