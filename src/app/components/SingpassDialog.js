@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import React from "react";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import db from "../../../utils/firestore";
 
-export default function MyInfoDialog({ id, phone, nric }) {
-  
+export default function MyInfoDialog({ nric }) {
   const [userData, setUserData] = useState({
     Name: "",
     Status: "Pending",
@@ -14,24 +15,24 @@ export default function MyInfoDialog({ id, phone, nric }) {
     Email: "",
   });
 
+  const singpassCollection = collection(db, "singpass");
+
   useEffect(() => {
     async function fetchData() {
-
-      
-      const response = await fetch("https://sandbox.api.myinfo.gov.sg/com/v4/person-sample/G1612352N", {
-        method: "GET",
-        headers: {
-          "Content-Type": "*/*",
-          "Access-Control-Allow-Origin": "*"
-          
-        },
-      });
-      const data = await response;
-      console.log(data);
-
+      const q = query(
+        singpassCollection,
+        where("NRIC", "==", nric ? nric : "S9812381D")
+      );
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.docs.length > 0) {
+        setUserData(querySnapshot.docs[0].data());
+      } else {
+        console.log("No user found with the given NRIC");
+      }
     }
     fetchData();
   }, []);
+
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
@@ -58,7 +59,7 @@ export default function MyInfoDialog({ id, phone, nric }) {
             <input
               className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
               id="name"
-              defaultValue="Enter your full name"
+              defaultValue={userData.Name ? userData.Name : "Loading"}
             />
           </fieldset>
           <fieldset className="mb-[15px] flex items-center gap-5">
@@ -71,7 +72,7 @@ export default function MyInfoDialog({ id, phone, nric }) {
             <input
               className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
               id="nric"
-              defaultValue="Enter your 9 digit UIN"
+              defaultValue={userData.NRIC ? userData.NRIC : "Loading"}
             />
           </fieldset>
           <fieldset className="mb-[15px] flex items-center gap-5">
@@ -84,7 +85,7 @@ export default function MyInfoDialog({ id, phone, nric }) {
             <input
               className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
               id="email"
-              defaultValue="Enter your email address"
+              defaultValue={userData.Email ? userData.Email : "Loading"}
             />
           </fieldset>
           <fieldset className="mb-[15px] flex items-center gap-5">
@@ -97,10 +98,10 @@ export default function MyInfoDialog({ id, phone, nric }) {
             <input
               className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
               id="phone"
-              defaultValue="Enter your phone number."
+              defaultValue={userData.Phone ? userData.Phone : "Loading"}
             />
           </fieldset>
-          <div className="mt-[25px] flex justify-end">
+          <div className="mt-[25px] flex justify-between">
             <Dialog.Close asChild>
               <button className="bg-green4 text-green11 hover:bg-green5 focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none">
                 Save changes

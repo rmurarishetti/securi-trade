@@ -1,5 +1,6 @@
 "use client";
-import { useEffect } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import Gradient from "@bedard/gradient";
 import { Singpass } from "../../../public";
 import Image from "next/image";
@@ -8,6 +9,9 @@ import ParticularsFormDialog from "./FormDialog";
 import MyInfoDialog from "./SingpassDialog";
 
 export default function ParticularsComponents() {
+  const [nric, setNric] = useState("");
+  const formData = new FormData();
+
   useEffect(() => {
     const canvas = document.querySelector("canvas");
     new Gradient(canvas, {
@@ -15,6 +19,8 @@ export default function ParticularsComponents() {
       seed: Math.random(),
     });
   }, []);
+
+
   return (
     <div className="h-1/2 relative flex sm:flex-col">
       <div className="z-0">
@@ -50,7 +56,7 @@ export default function ParticularsComponents() {
                 Click on Retrieve MyInfo to fill in your particulars.
               </div>
               <Form.Root className="flex flex-col justify-center">
-                <Form.Field className="grid mb-[10px]" name="email">
+                <Form.Field className="grid mb-[10px]" name="nric">
                   <div className="flex items-baseline justify-between">
                     <Form.Label className="text-[15px] font-medium leading-[35px] text-black">
                       NRIC/FIN
@@ -61,26 +67,20 @@ export default function ParticularsComponents() {
                     >
                       Please Enter Your NRIC/FIN
                     </Form.Message>
-                    <Form.Message
-                      className="text-[13px] text-black opacity-[0.8]"
-                      match="typeMismatch"
-                    >
-                      Please provide a valid NRIC/FIN
-                    </Form.Message>
                   </div>
                   <div className="flex justify-between items-center gap-x-1">
-                    <Form.Control asChild>
+                    {/* <Form.Control asChild>
                       <input
+                        value={nric}
+                        onChange={handleChange}
                         className="box-border w-3/5 bg-blackA2 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-black selection:bg-blackA6"
-                        type="email"
                         placeholder="Enter Your 9 Digit UIN"
                         required
                       />
-                    </Form.Control>
-                    {/* <button className="box-border text-white inline-flex h-[35px] items-center justify-center rounded-[4px] bg-[#F4333D] px-[15px] font-medium leading-none">
-                      Retrieve MyInfo
-                    </button> */}
-                    <MyInfoDialog />
+                    </Form.Control> */}
+                    
+                    <MyInfoDialog nric={nric} />
+                    
                   </div>
                 </Form.Field>
               </Form.Root>
