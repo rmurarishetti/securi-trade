@@ -1,9 +1,37 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Gradient from "@bedard/gradient";
 import * as Form from "@radix-ui/react-form";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import db from "../../../utils/firestore";
 
-export default function UserStatusComponent() {
+export default function UserStatusComponent({ id }) {
+  //Create a useState object to store name, email, phone, and nric and status
+  const [userData, setUserData] = useState({
+    Name: "",
+    Status: "",
+    Phone: "",
+    NRIC: "",
+    Email: "",
+  });
+
+  const userCollection = collection(db, "users");
+
+  useEffect(() => {
+    async function fetchData() {
+      const q = query(userCollection, where("NRIC", "==", id));
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.docs.length > 0) {
+        setUserData(querySnapshot.docs[0].data());
+        console.log(querySnapshot.docs[0].data());
+        console.log(userData);
+      } else {
+        console.log("No user found with the given NRIC");
+      }
+    }
+    fetchData();
+  }, []);
+
   useEffect(() => {
     const canvas = document.querySelector("canvas");
     new Gradient(canvas, {
@@ -32,7 +60,7 @@ export default function UserStatusComponent() {
           <div className="flex-1 p-5 border-2 rounded-md my-2">
             <div className="flex-col">
               <div className="font-bold md:text-xl lg:text-3xl sm:text-lg w-3/4 pb-2">
-                Your Application Status: Processing
+                Your Application Status: {userData.Status}
               </div>
               <div className="md:text-md lg:text-lg sm:text-sm w-4/5 py-2">
                 Details of your application will be sent to your email.
@@ -56,7 +84,9 @@ export default function UserStatusComponent() {
                       </Form.Label>
                     </div>
                     <Form.Control asChild>
-                      <div className="box-border w-3/5 bg-blackA2 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none  selection:color-black" />
+                      <div className="box-border w-3/5 bg-blackA2 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none  selection:color-black">
+                        {userData.NRIC}
+                      </div>
                     </Form.Control>
                   </Form.Field>
                   <Form.Field className="w-full grid mb-[10px]" name="email">
@@ -66,7 +96,9 @@ export default function UserStatusComponent() {
                       </Form.Label>
                     </div>
                     <Form.Control asChild>
-                      <div className="box-border w-3/5 bg-blackA2 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none  selection:color-black" />
+                      <div className="box-border w-3/5 bg-blackA2 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none  selection:color-black">
+                        {userData.Name}
+                      </div>
                     </Form.Control>
                   </Form.Field>
                 </div>
@@ -78,7 +110,9 @@ export default function UserStatusComponent() {
                       </Form.Label>
                     </div>
                     <Form.Control asChild>
-                      <div className="box-border w-3/5 bg-blackA2 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none  selection:color-black" />
+                      <div className="box-border w-3/5 bg-blackA2 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none  selection:color-black" >
+                        {userData.Email}
+                      </div>
                     </Form.Control>
                   </Form.Field>
                   <Form.Field className="w-full grid mb-[10px]" name="email">
@@ -88,7 +122,9 @@ export default function UserStatusComponent() {
                       </Form.Label>
                     </div>
                     <Form.Control asChild>
-                      <div className="box-border w-3/5 bg-blackA2 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none  selection:color-black" />
+                      <div className="box-border w-3/5 bg-blackA2 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none  selection:color-black" >
+                      {userData.Phone}
+                      </div>
                     </Form.Control>
                   </Form.Field>
                 </div>
