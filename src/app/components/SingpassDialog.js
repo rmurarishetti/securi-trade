@@ -18,7 +18,7 @@ export default function MyInfoDialog({ id, phone, nric }) {
     async function fetchData() {
 
       
-      const response = await fetch("/api/myInfo", {
+      const response = await fetch("https://sandbox.api.myinfo.gov.sg/com/v4/person-sample/G1612352N", {
         method: "GET",
         headers: {
           "Content-Type": "*/*",
