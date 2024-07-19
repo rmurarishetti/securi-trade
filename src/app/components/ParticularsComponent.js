@@ -4,6 +4,8 @@ import Gradient from "@bedard/gradient";
 import { Singpass } from "../../../public";
 import Image from "next/image";
 import * as Form from "@radix-ui/react-form";
+import ParticularsFormDialog from "./FormDialog";
+import MyInfoDialog from "./SingpassDialog";
 
 export default function ParticularsComponents() {
   useEffect(() => {
@@ -75,9 +77,10 @@ export default function ParticularsComponents() {
                         required
                       />
                     </Form.Control>
-                    <button className="box-border text-white inline-flex h-[35px] items-center justify-center rounded-[4px] bg-[#F4333D] px-[15px] font-medium leading-none">
+                    {/* <button className="box-border text-white inline-flex h-[35px] items-center justify-center rounded-[4px] bg-[#F4333D] px-[15px] font-medium leading-none">
                       Retrieve MyInfo
-                    </button>
+                    </button> */}
+                    <MyInfoDialog />
                   </div>
                 </Form.Field>
               </Form.Root>
@@ -92,9 +95,7 @@ export default function ParticularsComponents() {
                 Click on Fill to manually fill in your particulars. Please have
                 a copy of your document ready.
               </div>
-              <button className="box-border w-full text-white inline-flex h-[35px] items-center justify-center rounded-[4px] bg-[#635BFF] px-[15px] font-medium leading-none mt-[10px]">
-                Fill Particulars
-              </button>
+              <ParticularsFormDialog />
             </div>
           </div>
         </div>

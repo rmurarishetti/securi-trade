@@ -13,9 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* <head>
-      <link rel="icon" href={favicon} sizes="<generated>" />
-      </head> */}
+      
       <body>
           <div className={``}>
             <div className={`$xl:max-w-full w-full`}>

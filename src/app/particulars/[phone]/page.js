@@ -1,4 +1,4 @@
-import ParticularsComponents from "../components/ParticularsComponent";
+import ParticularsComponents from "../../components/ParticularsComponent";
 
 
 export default function ParticularsPage() {
