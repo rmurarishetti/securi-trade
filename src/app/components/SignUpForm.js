@@ -41,7 +41,7 @@ export default function SignUpForm() {
       // }
       const q = query(userCollection, where("Phone", "==", state.phone));
       const querySnapshot = await getDocs(q);
-      console.log(querySnapshot.docs[0].data());
+      //console.log(querySnapshot.docs[0].data());
       if (querySnapshot.docs.length > 0) {
         const data = querySnapshot.docs[0].data();
         router.push(`/user/${data.NRIC}`);

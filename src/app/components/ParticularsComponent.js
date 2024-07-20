@@ -61,12 +61,12 @@ export default function ParticularsComponents() {
   };
 
   return (
-    <div className="h-1/2 relative flex sm:flex-col">
-      <div className="z-0">
-        <canvas className="h-1/2"></canvas>
+    <div className="h-1/2 relative sm:flex flex-col">
+      <div className="z-0 h-1/4">
+        <canvas className="w-full"></canvas>
       </div>
 
-      <div className="absolute top-6 left-12 flex w-1/2 h-full justify-center my-20 z-30">
+      <div className="absolute top-6 left-12 flex w-1/2 sm:h-full justify-center my-20 z-30">
         <span className="md:text-5xl lg:text-6xl sm:text-xl pl-8 font-bold justify-end text-[#3A3A3A]/75">
           <div className="text-white">Know Your Customer.</div>
           <div className="md:text-3xl lg:text-4xl sm:text-lg py-2">
@@ -75,7 +75,7 @@ export default function ParticularsComponents() {
         </span>
       </div>
 
-      <div className="w-full z-30 absolute bottom-0 right-0 flex bg-white justify-center items-center">
+      <div className="w-full sm:absolute sm:bottom-0 pt-12 z-30 sm:flex bg-white justify-center items-center">
         <div className="w-full px-10 flex flex-col sm:flex-row justify-between sm:space-x-2">
           <div className="flex-1 p-5 border-2 rounded-md my-2">
             <div className="flex-col">
