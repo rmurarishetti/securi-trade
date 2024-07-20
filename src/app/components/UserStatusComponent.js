@@ -30,7 +30,7 @@ export default function UserStatusComponent({ id }) {
       }
     }
     fetchData();
-  }, []);
+  });
 
   useEffect(() => {
     const canvas = document.querySelector("canvas");
