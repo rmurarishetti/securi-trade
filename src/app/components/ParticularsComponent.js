@@ -178,7 +178,7 @@ export default function ParticularsComponents({phone}) {
             <div className="flex-col">
               <Image src={Singpass} alt="logo" className="w-auto h-[52px]" />
               <div className="md:text-md lg:text-lg sm:text-sm w-4/5 py-2">
-                Click on Retrieve MyInfo to fill in your particulars.
+                Click on Retrieve MyInfo to fill in your particulars. Use S9912366D, G1612350T, S9812382B, S9812383Z, S9912366D to test.
               </div>
               <Form.Root
                 className="flex flex-col justify-center"
