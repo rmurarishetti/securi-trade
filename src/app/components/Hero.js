@@ -54,9 +54,11 @@ const Hero = () => {
           <div className="text-black">Round-The-Clock.</div>
         </span>
 
-        <div className="w-full items-center h-1/2 justify-center font-bold text-md z-30 text-black py-5 sm:hidden flex">
-          {" "}
-          Single Access. Multi Market. Round-The-Clock.
+        <div className="w-full items-center flex-col h-1/2 justify-center font-bold text-[10px] text-white sm:text-md z-30 text-black py-5 sm:hidden flex">
+          Single Access. Multi Market.
+          <div className="w-full items-center text-white justify-center font-bold text-[10px] sm:text-md z-30 text-black py-5 sm:hidden flex">
+            Round-The-Clock.
+          </div>
         </div>
       </div>
     </div>

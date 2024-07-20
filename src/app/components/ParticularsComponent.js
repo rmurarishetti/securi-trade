@@ -149,13 +149,13 @@ export default function ParticularsComponents({phone}) {
   return (
     <div className="h-1/2 relative sm:flex flex-col">
       <div className="z-0 h-1/4">
-        <canvas className="w-full"></canvas>
+        <canvas className="h-[200px] sm:h-auto w-full"></canvas>
       </div>
 
-      <div className="absolute top-6 left-12 flex w-1/2 sm:h-full justify-center my-20 z-30">
+      <div className="absolute top-6 left-12 flex w-1/2 justify-center my-20 z-30">
         <span className="md:text-5xl lg:text-6xl sm:text-xl pl-8 font-bold justify-end text-[#3A3A3A]/75">
           <div className="text-white">Know Your Customer.</div>
-          <div className="md:text-3xl lg:text-4xl sm:text-lg py-2">
+          <div className="md:text-3xl lg:text-4xl sm:text-lg text-sm py-2">
             Fill Your Particulars
           </div>
         </span>

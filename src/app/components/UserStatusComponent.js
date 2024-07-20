@@ -67,10 +67,10 @@ export default function UserStatusComponent({ id }) {
   return (
     <div className="h-1/2 relative sm:flex flex-col">
       <div className="z-0 h-1/4">
-        <canvas className="w-full"></canvas>
+        <canvas className="h-[200px] sm:h-auto w-full"></canvas>
       </div>
 
-      <div className="absolute top-0 sm:left-12 flex sm:w-1/2 w-full h-full justify-center my-20 z-30">
+      <div className="absolute top-0 sm:left-12 flex sm:w-1/2 w-full justify-center my-20 z-30">
         <span className="md:text-4xl lg:text-5xl sm:text-lg sm:pl-8 font-bold justify-end text-[#3A3A3A]/75">
           <div className="text-white">Your Application has been Recieved.</div>
           <div className="md:text-2xl lg:text-3xl sm:text-md text-[#3A3A3A] sm:text-[#3A3A3A]/75 py-1">
