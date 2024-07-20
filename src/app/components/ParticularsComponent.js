@@ -1,3 +1,35 @@
+/**
+ * ParticularsComponent
+ * 
+ * Overview:
+ * The ParticularsComponent is a React component designed to collect user particulars, including name, NRIC, email, and phone number. It leverages various technologies and libraries such as Firebase Firestore for data storage, Radix UI for dialog and form elements, and Next.js for image handling and navigation.
+ * 
+ * Key Features:
+ * - Singpass Integration: Allows users to submit their particulars using Singpass, enhancing the authentication process and data accuracy.
+ * - Dynamic Form Dialog: Utilizes Radix UI's Dialog component to present a form in a modal dialog, improving user interaction and focus.
+ * - Firestore Database Interaction: Manages user data with Firestore, performing operations like querying and adding documents to store user particulars.
+ * - Client-Side Rendering: Marks the component for client-side rendering with the "use client" directive, optimizing performance and user experience in Next.js applications.
+ * 
+ * State Management:
+ * - Uses React's useState hook to manage local state, including form fields (nric), dialog visibility (singpassDialogOpen), and user data (userData).
+ * 
+ * Navigation:
+ * - Employs the useRouter hook from Next.js for navigation. However, there's an incorrect import statement that should be corrected to import from "next/router" instead of "next/navigation".
+ * 
+ * Form Handling:
+ * - Implements a form submission handler (handleSingpassSubmit) that validates the input fields before proceeding with the submission logic. This ensures that all required fields are filled out.
+ * 
+ * Firestore Integration:
+ * - Utilizes Firestore's collection, query, where, getDocs, and addDoc functions to interact with the Firestore database, enabling the retrieval and storage of user particulars.
+ * 
+ * Usage:
+ * This component is intended for use in applications requiring user authentication and data collection, particularly where Singpass integration is beneficial. It's suitable for scenarios demanding secure and verified user data submission.
+ * 
+ * Implementation Notes:
+ * - The component should ensure all user data is validated and sanitized before submission to Firestore to maintain data integrity and security.
+ * - Error handling should be implemented for Firestore operations and form submission to enhance user experience and debuggability.
+ */
+
 "use client";
 import React from "react";
 import { useEffect, useState } from "react";

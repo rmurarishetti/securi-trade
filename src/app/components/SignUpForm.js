@@ -1,3 +1,40 @@
+/**
+ * SignUpForm Component
+ * 
+ * This component is responsible for rendering and handling the sign-up form functionality
+ * within the application. It utilizes React hooks for state management and effects, Radix UI
+ * components for the form and toast notifications, and Firebase Firestore for querying user data.
+ * 
+ * Imports and Setup:
+ * - React and its hooks (useState, useEffect) for component state and lifecycle management.
+ * - Radix UI components (@radix-ui/react-form and @radix-ui/react-toast) for building the form
+ *   and displaying toast notifications.
+ * - Next.js useRouter hook for navigation after form submission.
+ * - Firebase Firestore functions for database operations.
+ * - A pre-configured Firestore database instance from a utility module.
+ * 
+ * Component State:
+ * - `state`: An object containing form fields such as phone number and code.
+ * - `toastOpen`: A boolean to control the visibility of the toast notification.
+ * - `toastContents`: An object holding the title and description for the toast notification.
+ * 
+ * Handlers:
+ * - `handleChange`: Updates the component's state with form input values.
+ * - `handleSubmit`: An asynchronous function to handle form submission, including validation
+ *   and database querying.
+ * 
+ * Usage:
+ * - The component is designed to be used as a sign-up form within a user authentication flow.
+ * - It captures user input for phone number and code, which can be extended for additional fields.
+ * 
+ * Notes:
+ * - The component demonstrates a pattern of handling form inputs and submissions in React,
+ *   including state management for inputs and asynchronous operations like database queries.
+ * - The use of Radix UI components for form and toast notifications showcases a modern approach
+ *   to building interactive and user-friendly interfaces.
+ * - Integration with Firebase Firestore for user data storage and retrieval is indicative of
+ *   the component's role in user authentication and management workflows.
+ */
 "use client";
 import React from "react";
 import { useState, useEffect } from "react";

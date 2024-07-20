@@ -1,3 +1,29 @@
+/**
+ * FormDialog Component
+ * 
+ * Overview:
+ * The FormDialog component is designed to provide a modal dialog interface for user input within a Next.js application. It leverages the useRouter hook from Next.js for navigation purposes, indicating its use in scenarios where navigation is contingent upon user interaction within the dialog.
+ * 
+ * Key Features:
+ * - Modal Dialog Interface: Offers a focused environment for user input or confirmation tasks, minimizing distractions from the main content.
+ * - Navigation Control: Utilizes the useRouter hook for controlling navigation, which is useful for redirecting users after submitting a form or completing an interaction within the dialog.
+ * - Form Submission: Handles form submission internally, validating user input and processing the data before triggering navigation or other actions.
+ * 
+ * Usage:
+ * This component can be utilized in various user interaction scenarios, such as:
+ * - Collecting user input through forms within a modal dialog.
+ * - Confirming user actions (e.g., deletion confirmations, terms and conditions acceptance) before proceeding.
+ * - Displaying additional information or options without navigating away from the current context.
+ * 
+ * Implementation Notes:
+ * - The component should manage its own display state, toggling visibility based on user interaction or application flow.
+ * - It should handle form submission or user input internally, possibly using local state or context for state management.
+ * - Navigation after user interaction should be handled thoughtfully, ensuring a smooth user experience and maintaining the integrity of the application's navigation flow.
+ * 
+ * Example Use Case:
+ * Imagine a scenario where a user needs to agree to terms and conditions before using a certain feature of the application. The FormDialog component could be used to present these terms in a modal dialog, capturing user consent through a form submission, and then using useRouter to navigate to the feature upon agreement.
+ */
+
 "use client";
 import * as Dialog from "@radix-ui/react-dialog";
 import React from "react";

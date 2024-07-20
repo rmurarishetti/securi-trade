@@ -1,3 +1,27 @@
+/**
+ * UserStatusComponent
+ * 
+ * Overview:
+ * The UserStatusComponent is a React component designed for displaying the status of a user based on their National Registration Identity Card (NRIC) number. It utilizes client-side rendering, indicated by the "use client" directive, to enhance performance and user experience. The component fetches user data from a Firestore database and displays relevant information such as name, email, phone number, NRIC, and status.
+ * 
+ * Key Features:
+ * - Firestore Database Integration: Queries user data from a Firestore collection based on the NRIC number provided as a prop.
+ * - Dynamic Data Fetching: Utilizes React's useEffect hook to fetch user data asynchronously upon component mount or when the provided NRIC number changes.
+ * - State Management: Manages user data state using React's useState hook, allowing for reactive updates to the UI based on fetched data.
+ * - Client-Side Rendering: Optimizes rendering performance and user experience by executing in the client's browser.
+ * 
+ * Implementation Details:
+ * - The component initializes a state object `userData` to store user particulars including Name, Status, Phone, NRIC, and Email.
+ * - It defines a Firestore collection reference `userCollection` targeting the "users" collection within the Firestore database.
+ * - Utilizes two useEffect hooks:
+ *   - The first useEffect hook is responsible for fetching user data from Firestore based on the NRIC number. It sets the fetched data to the `userData` state, triggering a re-render with the updated information.
+ *   - The second useEffect hook is not fully shown but is implied to be used for additional side effects or cleanup operations.
+ * 
+ * Usage:
+ * This component is intended for use in applications requiring the display of user status information, particularly in systems that identify users based on NRIC numbers. It can be used in administrative dashboards, user profile pages, or any application section where user verification and status display are required.
+ * 
+ */
+
 "use client";
 import { useEffect, useState } from "react";
 import Gradient from "@bedard/gradient";
