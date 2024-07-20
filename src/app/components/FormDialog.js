@@ -2,12 +2,81 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import React from "react";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import { useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import db from "../../../utils/firestore";
+import { useRouter } from "next/navigation";
 
 export default function ParticularsFormDialog() {
+  const router = useRouter();
+
+  const [open, setOpen] = useState(false);
+
+  const [state, setState] = useState({
+    Name: "",
+    Status: "",
+    Phone: "",
+    NRIC: "",
+    Email: "",
+  });
+
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    /*Validate all fields are not empty*/
+    if (
+      state.Name === "" ||
+      state.NRIC === "" ||
+      state.Email === "" ||
+      state.Phone === ""
+    ) {
+      alert("Please fill in all fields");
+      return;
+    }
+    /*Validate NRIC is 9 digits*/
+    if (!(state.NRIC.length === 9)) {
+      alert("Invalid NRIC");
+      return;
+    }
+    /*Validate Phone is 8 digits*/
+    if (!/^\d{8}$/.test(state.Phone)) {
+      alert("Invalid Phone Number");
+      return;
+    }
+    /*Validate Email is in email format*/
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.Email)) {
+      alert("Invalid Email");
+      return;
+    }
+    /*Submit the form*/
+    const docRef = await addDoc(collection(db, "users"), {
+      Name: state.Name,
+      NRIC: state.NRIC,
+      Email: state.Email,
+      Phone: state.Phone,
+      Status: "Pending",
+    });
+    if (docRef.id) {
+      setOpen(false);
+      router.push(`/user/${state.NRIC}`);
+    } else {
+      alert("An error occurred. Please try again");
+    }
+  };
+
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open}>
       <Dialog.Trigger asChild>
-        <button className="box-border w-full text-white inline-flex h-[35px] items-center justify-center rounded-[4px] bg-[#635BFF] px-[15px] font-medium leading-none mt-[10px]">
+        <button
+          onClick={() => setOpen(true)}
+          className="box-border w-full text-white inline-flex h-[35px] items-center justify-center rounded-[4px] bg-[#635BFF] px-[15px] font-medium leading-none mt-[10px]"
+        >
           Fill Particulars
         </button>
       </Dialog.Trigger>
@@ -29,7 +98,9 @@ export default function ParticularsFormDialog() {
             </label>
             <input
               className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-              id="name"
+              id="Name"
+              defaultValue={state.Name}
+              onChange={handleChange}
               placeholder="Enter your full name"
             />
           </fieldset>
@@ -42,8 +113,10 @@ export default function ParticularsFormDialog() {
             </label>
             <input
               className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-              id="nric"
-              placeholder="Enter your 9 digit UIN"
+              id="NRIC"
+              defaultValue={state.NRIC}
+              onChange={handleChange}
+              placeholder="Enter your NRIC/FIN"
             />
           </fieldset>
           <fieldset className="mb-[15px] flex items-center gap-5">
@@ -55,7 +128,9 @@ export default function ParticularsFormDialog() {
             </label>
             <input
               className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-              id="email"
+              id="Email"
+              defaultValue={state.Email}
+              onChange={handleChange}
               placeholder="Enter your email address"
             />
           </fieldset>
@@ -68,25 +143,27 @@ export default function ParticularsFormDialog() {
             </label>
             <input
               className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-              id="phone"
+              id="Phone"
+              defaultValue={state.Phone}
+              onChange={handleChange}
               placeholder="Enter your phone number."
             />
           </fieldset>
           <div className="mt-[25px] flex justify-end">
-            <Dialog.Close asChild>
-              <button className="bg-green4 text-green11 hover:bg-green5 focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none">
-                Save changes
-              </button>
-            </Dialog.Close>
-          </div>
-          <Dialog.Close asChild>
             <button
-              className="text-violet11 hover:bg-violet4 focus:shadow-violet7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
-              aria-label="Close"
+              onClick={handleSubmit}
+              className="bg-[#635BFF] text-white focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
             >
-              <Cross2Icon />
+              Submit
             </button>
-          </Dialog.Close>
+          </div>
+          <button
+            onClick={() => setOpen(false)}
+            className="text-black hover:bg-violet4 focus:shadow-violet7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
+            aria-label="Close"
+          >
+            <Cross2Icon />
+          </button>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

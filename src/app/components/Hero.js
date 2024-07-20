@@ -28,10 +28,12 @@ const Hero = () => {
           <div className="text-black">Single Access.</div>
           <div className="py-2">Multi Market. </div>
           <div className="text-black">Round-The-Clock.</div>
-          
         </span>
 
-        <div className="w-full items-center h-1/2 justify-center font-bold text-md z-30 text-black py-5 sm:hidden flex"> Single Access. Multi Market. Round-The-Clock.</div>
+        <div className="w-full items-center h-1/2 justify-center font-bold text-md z-30 text-black py-5 sm:hidden flex">
+          {" "}
+          Single Access. Multi Market. Round-The-Clock.
+        </div>
       </div>
     </div>
   );

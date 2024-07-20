@@ -21,7 +21,6 @@ export default function Footer() {
                     Meet the Team
                   </a>
                 </li>
-                
               </nav>
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
@@ -29,7 +28,6 @@ export default function Footer() {
                 Company
               </h2>
               <nav className="list-none mb-10 flex flex-col space-y-3 text-sm font-normal">
-               
                 <li>
                   <a className="text-gray-600 hover:text-gray-800 cursor-pointer">
                     Regulatory
@@ -57,7 +55,6 @@ export default function Footer() {
                     Investor Relations
                   </a>
                 </li>
-                
               </nav>
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
@@ -65,7 +62,7 @@ export default function Footer() {
                 Media
               </h2>
               <nav className="list-none mb-10 flex flex-col space-y-3 text-sm font-normal">
-              <li>
+                <li>
                   <a className="text-gray-600 hover:text-gray-800 cursor-pointer">
                     Press Releases
                   </a>
@@ -75,7 +72,6 @@ export default function Footer() {
                     Roadmap
                   </a>
                 </li>
-                
               </nav>
             </div>
           </div>

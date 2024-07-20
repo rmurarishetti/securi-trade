@@ -6,22 +6,68 @@ import { Singpass } from "../../../public";
 import Image from "next/image";
 import * as Form from "@radix-ui/react-form";
 import ParticularsFormDialog from "./FormDialog";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import db from "../../../utils/firestore";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import { useRouter } from "next/navigation";
 
-export default function ParticularsComponents() {
+export default function ParticularsComponents({phone}) {
+  const router = useRouter();
+
   const [state, setState] = useState({ nric: "" });
   const [singpassDialogOpen, setSingpassDialogOpen] = useState(false);
 
   const [userData, setUserData] = useState({
     Name: "",
     Status: "Pending",
-    Phone: "",
+    Phone: phone,
     NRIC: "",
     Email: "",
   });
+
+  const handleSingpassSubmit = async (e) => {
+    e.preventDefault();
+    /*Validate all fields are not empty*/
+    if (
+      userData.Name === "" ||
+      userData.NRIC === "" ||
+      userData.Email === "" ||
+      userData.Phone === ""
+    ) {
+      alert("Please fill in all fields");
+      return;
+    }
+    /*Validate NRIC is 9 digits*/
+    if (!(userData.NRIC.length === 9)|| (userData.NRIC !== state.nric)) {
+      alert("Invalid NRIC or NRIC doesn't match the one provided to fetch information");
+      return;
+    }
+    /*Validate Phone is 8 digits*/
+    if (!/^\d{8}$/.test(userData.Phone)) {
+      alert(`Invalid Phone Number`);
+      return;
+    }
+    /*Validate Email is in email format*/
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userData.Email)) {
+      alert("Invalid Email");
+      return;
+    }
+    /*Submit the form*/
+    const docRef = await addDoc(collection(db, "users"), {
+      Name: userData.Name,
+      NRIC: userData.NRIC,
+      Email: userData.Email,
+      Phone: phone,
+      Status: "Pending",
+    });
+    if (docRef.id) {
+      setSingpassDialogOpen(false);
+      router.push(`/user/${userData.NRIC}`);
+    } else {
+      alert("An error occurred. Please try again");
+    }
+  };
 
   const singpassCollection = collection(db, "singpass");
 
@@ -52,6 +98,14 @@ export default function ParticularsComponents() {
     setState({
       ...state,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSingpassChange = (e) => {
+    console.log(e.target.id, e.target.value);
+    setUserData({
+      ...userData,
+      [e.target.id]: e.target.value,
     });
   };
 
@@ -120,8 +174,6 @@ export default function ParticularsComponents() {
                         required
                       />
                     </Form.Control>
-
-                    {/* <MyInfoDialog nric={state.nric} /> */}
                     <button className="box-border text-white inline-flex h-[35px] items-center justify-center rounded-[4px] bg-[#F4333D] px-[15px] font-medium leading-none">
                       Retrieve MyInfo
                     </button>
@@ -135,7 +187,7 @@ export default function ParticularsComponents() {
                         Fetching Particulars from Singpass
                       </Dialog.Title>
                       <Dialog.Description className="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">
-                        Click save when you&apos;re done.
+                        Click submit when you&apos;re done.
                       </Dialog.Description>
                       <fieldset className="mb-[15px] flex items-center gap-5">
                         <label
@@ -146,8 +198,10 @@ export default function ParticularsComponents() {
                         </label>
                         <input
                           className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-                          id="name"
-                          value={userData.Name ? userData.Name : "Loading"}
+                          id="Name"
+                          defaultValue={userData.Name}
+                          placeholder="Loading"
+                          handleChange={handleSingpassChange}
                         />
                       </fieldset>
                       <fieldset className="mb-[15px] flex items-center gap-5">
@@ -159,8 +213,10 @@ export default function ParticularsComponents() {
                         </label>
                         <input
                           className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-                          id="nric"
-                          value={userData.NRIC ? userData.NRIC : "Loading"}
+                          id="NRIC"
+                          placeholder="Loading"
+                          defaultValue={userData.NRIC}
+                          handleChange={handleSingpassChange}
                         />
                       </fieldset>
                       <fieldset className="mb-[15px] flex items-center gap-5">
@@ -172,8 +228,10 @@ export default function ParticularsComponents() {
                         </label>
                         <input
                           className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-                          id="email"
-                          value={userData.Email ? userData.Email : "Loading"}
+                          id="Email"
+                          defaultValue={userData.Email}
+                          placeholder="Loading"
+                          handleChange={handleSingpassChange}
                         />
                       </fieldset>
                       <fieldset className="mb-[15px] flex items-center gap-5">
@@ -185,14 +243,19 @@ export default function ParticularsComponents() {
                         </label>
                         <input
                           className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-                          id="phone"
-                          value={userData.Phone ? userData.Phone : "Loading"}
+                          id="Phone"
+                          defaultValue={userData.Phone}
+                          placeholder="Loading"
+                          handleChange={handleSingpassChange}
                         />
                       </fieldset>
                       <div className="mt-[25px] flex justify-end">
                         <Dialog.Close asChild>
-                          <button className="bg-[#F4333D] text-white focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none">
-                            Save changes
+                          <button
+                            onClick={handleSingpassSubmit}
+                            className="bg-[#F4333D] text-white focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
+                          >
+                            Submit
                           </button>
                         </Dialog.Close>
                       </div>

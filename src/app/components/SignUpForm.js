@@ -45,10 +45,9 @@ export default function SignUpForm() {
       if (querySnapshot.docs.length > 0) {
         const data = querySnapshot.docs[0].data();
         router.push(`/user/${data.NRIC}`);
-      } else{
+      } else {
         router.push(`/particulars/${state.phone}`);
       }
-      
     } else {
       alert("Invalid Phone Number or Verification Code");
     }
